@@ -33,6 +33,10 @@ public class CultsService
   internal Cult Get(int cultId) // our GET ONE
   {
     Cult cult = _repo.GetOne(cultId);
+
+    cult.Popularity++;
+
+    _repo.Edit(cult);
     return cult;
   }
 }

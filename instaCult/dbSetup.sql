@@ -20,6 +20,8 @@ CREATE TABLE
         FOREIGN KEY (leaderId) REFERENCES accounts(id) ON DELETE CASCADE
     ) default charset utf8mb4 COMMENT '';
 
+ALTER TABLE cults ADD COLUMN popularity INT NOT NULL DEFAULT 0;
+
 INSERT INTO
     cults (
         name,

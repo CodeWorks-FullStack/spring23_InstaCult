@@ -22,6 +22,19 @@ public class CultsRepository
     return id;
   }
 
+  internal void Edit(Cult cult)
+  {
+    string sql = @"
+    UPDATE cults
+    SET
+    name = @Name,
+    popularity = @Popularity
+    WHERE id = @Id
+    ;";
+
+    _db.Execute(sql, cult);
+  }
+
   internal List<Cult> GetAll()
   {
     string sql = @"

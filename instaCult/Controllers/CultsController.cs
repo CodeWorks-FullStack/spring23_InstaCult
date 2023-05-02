@@ -5,12 +5,15 @@ namespace instaCult.Controllers;
 public class CultsController : ControllerBase
 {
   private readonly CultsService _cultsService;
+
+  private readonly CultMembersService _cultMembersService;
   private readonly Auth0Provider _auth;
 
-  public CultsController(CultsService cultsService, Auth0Provider auth)
+  public CultsController(CultsService cultsService, Auth0Provider auth, CultMembersService cultMembersService)
   {
     _cultsService = cultsService;
     _auth = auth;
+    _cultMembersService = cultMembersService;
   }
 
   [HttpPost]
@@ -62,6 +65,20 @@ public class CultsController : ControllerBase
     {
       Cult cult = _cultsService.Get(cultId);
       return Ok(cult);
+    }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
+    }
+  }
+
+  [HttpGet("{cultId}/cultists")]
+  public ActionResult<List<Cultist>> GetCultistsInCult(int cultId)
+  {
+    try
+    {
+      List<Cultist> cultists = _cultMembersService.GetCultistsInCult(cultId);
+      return Ok(cultists);
     }
     catch (Exception e)
     {

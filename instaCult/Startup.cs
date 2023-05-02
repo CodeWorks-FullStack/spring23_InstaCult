@@ -36,6 +36,9 @@ public class Startup
 
     services.AddScoped<CultsRepository>();
     services.AddScoped<CultsService>();
+
+    services.AddScoped<CultMembersRepository>();
+    services.AddScoped<CultMembersService>();
   }
 
   private void ConfigureCors(IServiceCollection services)

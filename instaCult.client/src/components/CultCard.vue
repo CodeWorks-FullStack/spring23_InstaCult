@@ -1,7 +1,7 @@
 <template>
   <div class="card bg-dark text-center">
     <div>
-      <img class="img-fluid" :src="cult.leader.picture" alt="">
+      <ProfilePicture :profile="cult.leader" />
       <p>{{ cult.leader.name }}</p>
     </div>
     <div class="p-2">
@@ -21,11 +21,13 @@
 import { AppState } from '../AppState';
 import { computed, reactive, onMounted } from 'vue';
 import { Cult } from '../models/Cult.js';
+import ProfilePicture from './ProfilePicture.vue';
 export default {
   props: { cult: { type: Cult, required: true } },
   setup() {
-    return {}
-  }
+    return {};
+  },
+  components: { ProfilePicture }
 };
 </script>
 

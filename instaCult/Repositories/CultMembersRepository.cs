@@ -41,4 +41,19 @@ public class CultMembersRepository
 
     return cultists;
   }
+
+  internal CultMember GetOneCultMember(int cultMemberId)
+  {
+    string sql = "SELECT * FROM cultMembers WHERE id = @cultMemberId;";
+
+    CultMember cultMember = _db.Query<CultMember>(sql, new { cultMemberId }).FirstOrDefault();
+    return cultMember;
+  }
+
+  internal void RemoveCultMember(int cultMemberId)
+  {
+    string sql = "DELETE FROM cultMembers WHERE id = @cultMemberId LIMIT 1;";
+
+    _db.Execute(sql, new { cultMemberId });
+  }
 }

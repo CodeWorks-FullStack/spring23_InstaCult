@@ -28,4 +28,19 @@ public class CultMembersController : ControllerBase
       return BadRequest(e.Message);
     }
   }
+
+  [HttpDelete("{cultMemberId}")]
+  public async Task<ActionResult<string>> RemoveCultMember(int cultMemberId)
+  {
+    try
+    {
+      Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
+      string message = _cultMembersService.RemoveCultMember(cultMemberId, userInfo.Id);
+      return Ok(message);
+    }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
+    }
+  }
 }
